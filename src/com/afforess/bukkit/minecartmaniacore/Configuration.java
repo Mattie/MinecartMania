@@ -11,6 +11,10 @@ import org.bukkit.Material;
 
 
 public class Configuration {
+	/**
+	 ** Initializes Minecart Mania Core configuration values
+	 ** 
+	 **/
 	public static void loadConfiguration() {
 		readFile();
 	}
