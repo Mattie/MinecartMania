@@ -176,7 +176,7 @@ public class MinecartManiaMinecart {
 	public void doRealisticFriction() {
 		//if (DataUtils.isRealisticFriction()) {
 		{
-			if (minecart.getPassenger() == null && MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getType().equals(Material.Rails)) 	{
+			if (minecart.getPassenger() == null && MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getType().equals(Material.RAILS)) 	{
 				setMotion(getMotionX() * 1.03774, getMotionY(), getMotionZ()* 1.03774);
 	    	}
 		}
@@ -192,6 +192,6 @@ public class MinecartManiaMinecart {
 	}
 	
 	public boolean isOnRails() {
-		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeID() == Material.Rails.getID();
+		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeID() == Material.RAILS.getID();
 	}
 }

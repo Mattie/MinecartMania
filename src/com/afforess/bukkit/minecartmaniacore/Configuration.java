@@ -61,19 +61,19 @@ public class Configuration {
 			BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(file));
 			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecraft Mania " + MinecartManiaCore.version + " " + MinecartManiaCore.buildType, "Minecart Mania Core Config Settings", true);
 			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecart Mania Block Settings", "", false);
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "High Speed Booster Block", Material.GoldBlock.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "High Speed Booster Block", Material.GOLD_BLOCK.toString(), 
 					"Minecarts that pass over this will be boosted to 8x their current speed");
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Low Speed Booster Block", Material.GoldOre.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Low Speed Booster Block", Material.GOLD_ORE.toString(), 
 					"Minecarts that pass over this will be boosted to 2x their current speed");
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "High Speed Brake Block", Material.SlowSand.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "High Speed Brake Block", Material.SOUL_SAND.toString(), 
 					"Minecarts that pass over this will be slowed to 1/8 their current speed");
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Low Speed Brake Block", Material.Gravel.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Low Speed Brake Block", Material.GRAVEL.toString(), 
 					"Minecarts that pass over this will be slowed to 1/2 their current speed");
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Reverse Block", Material.Cloth.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Reverse Block", Material.WOOL.toString(), 
 					"Minecarts that pass over this will have their momentum and speed reveresed.");
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Catcher Block", Material.Obsidian.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Catcher Block", Material.OBSIDIAN.toString(), 
 					"Minecarts that pass over this without being powered by redstone will be stopped");
-			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Ejector Block", Material.IronBlock.toString(), 
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Ejector Block", Material.IRON_BLOCK.toString(), 
 			"Minecarts that pass over this will eject any passengers in the minecart");
 
 
@@ -90,19 +90,19 @@ public class Configuration {
 	{
 		try {
 			MinecartManiaWorld.setConfigurationValue("high speed booster block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Booster Block", Material.GoldBlock.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Booster Block", Material.GOLD_BLOCK.toString())).getID()));
 			MinecartManiaWorld.setConfigurationValue("low speed booster block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Booster Block", Material.GoldOre.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Booster Block", Material.GOLD_ORE.toString())).getID()));
 			MinecartManiaWorld.setConfigurationValue("high speed brake block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Brake Block", Material.SlowSand.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Brake Block", Material.SOUL_SAND.toString())).getID()));
 			MinecartManiaWorld.setConfigurationValue("low speed brake block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Brake Block", Material.Gravel.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Brake Block", Material.GRAVEL.toString())).getID()));
 			MinecartManiaWorld.setConfigurationValue("reverse block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Reverse Block", Material.Cloth.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Reverse Block", Material.WOOL.toString())).getID()));
 			MinecartManiaWorld.setConfigurationValue("catcher block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Catcher Block", Material.Obsidian.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Catcher Block", Material.OBSIDIAN.toString())).getID()));
 			MinecartManiaWorld.setConfigurationValue("ejector block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Ejector Block", Material.IronBlock.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Ejector Block", Material.IRON_BLOCK.toString())).getID()));
 
 		}
 		catch (Exception exception)
