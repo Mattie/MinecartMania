@@ -20,7 +20,7 @@ public class MinecartManiaCore extends JavaPlugin {
 	public final MinecartManiaCoreListener listener = new MinecartManiaCoreListener(this);
 	public final MinecartManiaActionListener actionListener = new MinecartManiaActionListener();
 	public static Logger log;
-	public static final String version = "0.2";
+	public static final String version = "0.3";
 	public static final String buildType = "Alpha";
 	public static Server server;
 	

@@ -164,6 +164,15 @@ public class MinecartManiaMinecart {
 		return false;
 	}
 	
+	public DirectionUtils.CompassDirection getDirectionOfMotion()
+	{
+		if (getMotionX() < 0.0D) return DirectionUtils.CompassDirection.NORTH;
+		if (getMotionZ() < 0.0D) return DirectionUtils.CompassDirection.EAST;
+		if (getMotionX() > 0.0D) return DirectionUtils.CompassDirection.SOUTH;
+		if (getMotionZ() > 0.0D) return DirectionUtils.CompassDirection.WEST;
+		return DirectionUtils.CompassDirection.NO_DIRECTION;
+	}
+	
 	public void doRealisticFriction() {
 		//if (DataUtils.isRealisticFriction()) {
 		{
@@ -180,5 +189,9 @@ public class MinecartManiaMinecart {
 			}
 		}
 		return false;
+	}
+	
+	public boolean isOnRails() {
+		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeID() == Material.Rails.getID();
 	}
 }

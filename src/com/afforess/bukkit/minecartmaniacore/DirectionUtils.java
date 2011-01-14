@@ -148,4 +148,26 @@ public abstract class DirectionUtils {
 			val -= 4;
 		return CompassDirection.fromId(val);
 	}
+	
+	public static CompassDirection getDirectionFromRotation(double degrees) {
+		while (degrees < 0D) {
+			degrees += 360D;
+		}
+		while (degrees > 360D) {
+			degrees -= 360D;
+		}
+		if (0 <= degrees && degrees < 45) {
+            return CompassDirection.NORTH;
+        } else if (45 <= degrees && degrees < 135) {
+            return CompassDirection.EAST;
+        } else if (135 <= degrees && degrees < 225) {
+            return CompassDirection.SOUTH;
+        } else if (225 <= degrees && degrees < 315) {
+        	return CompassDirection.WEST;
+        } else if (315 <= degrees && degrees <= 360.0) {
+        	return CompassDirection.NORTH;
+        }
+		
+		return CompassDirection.NO_DIRECTION;
+	}
 }
