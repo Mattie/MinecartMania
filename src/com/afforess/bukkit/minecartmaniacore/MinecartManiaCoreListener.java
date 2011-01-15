@@ -1,6 +1,8 @@
 package com.afforess.bukkit.minecartmaniacore;
 
+import org.bukkit.Entity;
 import org.bukkit.Minecart;
+import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.event.vehicle.VehicleListener;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 
@@ -20,6 +22,9 @@ public class MinecartManiaCoreListener extends VehicleListener{
 			MinecartManiaMinecart minecart = MinecartManiaWorld.getMinecartManiaMinecart(cart);
 			
 			minecart.doRealisticFriction();
+			if (minecart.isMoving()) {
+				minecart.setPreviousFacingDir(minecart.getDirectionOfMotion());
+			}
 			if (minecart.hasChangedPosition()) {
 				
 				MinecartActionEvent e = new MinecartActionEvent(minecart);
@@ -51,9 +56,21 @@ public class MinecartManiaCoreListener extends VehicleListener{
 				minecart.updateMotion();
 				minecart.updateLocation();
 			}
-			
-			
 		}
+    }
+	
+    public void onVehicleEntityCollision(VehicleEntityCollisionEvent event) {
+    	if (event.getVehicle() instanceof Minecart) {
+    		Minecart cart = (Minecart)event.getVehicle();
+			Entity collisioner = event.getEntity();
+			if (collisioner.getLocation().getBlockX() == cart.getLocation().getBlockX()) {
+				if (collisioner.getLocation().getBlockY() == cart.getLocation().getBlockY()) {
+					if (collisioner.getLocation().getBlockZ() == cart.getLocation().getBlockZ()) {
+						event.setCancelled(true);
+					}
+				}
+			}
+    	}
     }
 
 }

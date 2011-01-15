@@ -1,7 +1,6 @@
 package com.afforess.bukkit.minecartmaniacore;
 import java.io.File;
 import java.util.logging.Logger;
-import org.bukkit.Player;
 import org.bukkit.Server;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event;
@@ -14,15 +13,16 @@ public class MinecartManiaCore extends JavaPlugin {
 			PluginDescriptionFile desc, File plugin, ClassLoader cLoader) {
 		super(pluginLoader, instance, desc, plugin, cLoader);
 		server = instance;
+		description = desc;
 		
 	}
 
 	public final MinecartManiaCoreListener listener = new MinecartManiaCoreListener(this);
-	public final MinecartManiaActionListener actionListener = new MinecartManiaActionListener();
 	public static Logger log;
 	public static final String version = "0.3";
 	public static final String buildType = "Alpha";
 	public static Server server;
+	public static PluginDescriptionFile description;
 	
 	
 
@@ -37,7 +37,7 @@ public class MinecartManiaCore extends JavaPlugin {
     //    pm.registerEvent(Event.Type.VEHICLE_ENTER, listener, Priority.Normal, this);
      //   pm.registerEvent(Event.Type.VEHICLE_EXIT, listener, Priority.Normal, this);
         getServer().getPluginManager().registerEvent(Event.Type.VEHICLE_MOVE, listener, Priority.Highest, this);
-        getServer().getPluginManager().registerEvent(Event.Type.CUSTOM_EVENT, actionListener, Priority.Highest, this);
+        getServer().getPluginManager().registerEvent(Event.Type.VEHICLE_COLLISION_ENTITY, listener, Priority.Normal, this);
      //   pm.registerEvent(Event.Type.PLAYER_COMMAND, listener, Priority.Normal, this);
      //   pm.registerEvent(Event.Type.BLOCK_PLACED, listener, Priority.Normal, this);
 		//etc.getLoader().addListener(PluginLoader.Hook.VEHICLE_DESTROYED, listener, this, PluginListener.Priority.MEDIUM);
@@ -54,12 +54,4 @@ public class MinecartManiaCore extends JavaPlugin {
 	public void onDisable(){
 		
 	}
-	
-	public boolean isDebugging(final Player player) {
-		return false;
-    }
-
-    public void setDebugging(final Player player, final boolean value) {
-        
-    }
 }

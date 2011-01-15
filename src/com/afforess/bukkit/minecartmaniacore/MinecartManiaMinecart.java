@@ -1,7 +1,10 @@
 package com.afforess.bukkit.minecartmaniacore;
 
+import java.util.HashMap;
+
 import org.bukkit.Material;
 import org.bukkit.Minecart;
+import org.bukkit.Player;
 import org.bukkit.Vector;
 
 public class MinecartManiaMinecart {
@@ -9,6 +12,9 @@ public class MinecartManiaMinecart {
 	private static final double maxMomentum = 1E308;
 	private Vector previousLocation;
 	private Vector previousMotion;
+	private DirectionUtils.CompassDirection previousFacingDir = DirectionUtils.CompassDirection.NO_DIRECTION;
+	
+	private HashMap<String, Object> data = new HashMap<String,Object>();
 	
 	public MinecartManiaMinecart(Minecart cart) {
 		minecart = cart;
@@ -85,6 +91,10 @@ public class MinecartManiaMinecart {
 		setMotion(0D, 0D, 0D);
 	}
 	
+	public boolean isMoving() {
+		return getMotionX() != 0D || getMotionY() != 0D || getMotionZ() != 0D;
+	}
+	
 	public int getX(){
 		return minecart.getLocation().getBlockX();
 	}
@@ -97,11 +107,39 @@ public class MinecartManiaMinecart {
 		return minecart.getLocation().getBlockZ();
 	}
 	
-	private int getBlockIdBeneath() {
+	public void setPreviousFacingDir(DirectionUtils.CompassDirection dir) {
+		previousFacingDir = dir;
+	}
+
+	public DirectionUtils.CompassDirection getPreviousFacingDir() {
+		return previousFacingDir;
+	}
+	
+	/**
+	 ** Returns the value from the loaded data
+	 ** @param the string key the data value is associated with
+	 **/
+	 public Object getDataValue(String key) {
+		 if (data.containsKey(key)) {
+			 return data.get(key);
+		 }
+		 return null;
+	 }
+	 
+	/**
+	 ** Creates a new data value if it does not already exists, or resets an existing value
+	 ** @param the string key the data value is associated with
+	 ** @param the value to store
+	 **/	 
+	 public void setDataValue(String key, Object value) {
+		 data.put(key, value);
+	 }
+	
+	public int getBlockIdBeneath() {
 		return MinecartManiaWorld.getBlockAt(getX(), getY()-1, getZ()).getTypeID();
 	}
 	
-	private boolean isPoweredBeneath() {
+	public boolean isPoweredBeneath() {
 		return MinecartManiaWorld.isBlockIndirectlyPowered(getX(), getY()-1, getZ()) || MinecartManiaWorld.isBlockIndirectlyPowered(getX(), getY(), getZ());
 	}
 	
@@ -191,7 +229,42 @@ public class MinecartManiaMinecart {
 		return false;
 	}
 	
+	public boolean hasPlayerPassenger() {
+		return getPlayerPassenger() != null;
+	}
+	
+	public Player getPlayerPassenger() {
+		if (minecart.getPassenger() == null) {
+			return null;
+		}
+		if (minecart.getPassenger() instanceof Player) {
+			return (Player)minecart.getPassenger();
+		}
+		return null;
+	}
+	
 	public boolean isOnRails() {
 		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeID() == Material.RAILS.getID();
+	}
+	
+	public boolean isAtIntersection() {
+		
+		if (this.isOnRails()) {
+			int paths = 0;
+			if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
+				paths++;
+			}
+			if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
+				paths++;
+			}
+			if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS)) {
+				paths++;
+			}
+			if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS)) {
+				paths++;
+			}
+			return paths > 2;
+		}
+		return false;
 	}
 }
