@@ -9,18 +9,17 @@ import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MinecartManiaCore extends JavaPlugin {
+	
 	public MinecartManiaCore(PluginLoader pluginLoader, Server instance,
-			PluginDescriptionFile desc, File plugin, ClassLoader cLoader) {
-		super(pluginLoader, instance, desc, plugin, cLoader);
+			PluginDescriptionFile desc, File folder, File plugin,
+			ClassLoader cLoader) {
+		super(pluginLoader, instance, desc, folder, plugin, cLoader);
 		server = instance;
 		description = desc;
-		
 	}
 
 	public final MinecartManiaCoreListener listener = new MinecartManiaCoreListener(this);
 	public static Logger log;
-	public static final String version = "0.3";
-	public static final String buildType = "Alpha";
 	public static Server server;
 	public static PluginDescriptionFile description;
 	

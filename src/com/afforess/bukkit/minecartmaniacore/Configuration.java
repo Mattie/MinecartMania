@@ -37,7 +37,7 @@ public class Configuration {
 			BufferedReader bufferedreader = new BufferedReader(new FileReader(file));
 			for (String s = ""; (s = bufferedreader.readLine()) != null; )
 			{
-				if (s.indexOf(MinecartManiaCore.version) > -1)
+				if (s.indexOf(MinecartManiaCore.description.getVersion()) > -1)
 				{
 					return false;
 				}
@@ -58,7 +58,7 @@ public class Configuration {
 		{
 			file.createNewFile();
 			BufferedWriter bufferedwriter = new BufferedWriter(new FileWriter(file));
-			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecraft Mania " + MinecartManiaCore.version + " " + MinecartManiaCore.buildType, "Minecart Mania Core Config Settings", true);
+			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecraft Mania Core" + MinecartManiaCore.description.getVersion(), "Minecart Mania Core Config Settings", true);
 			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecart Mania Block Settings", "", false);
 			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "High Speed Booster Block", Material.GOLD_BLOCK.toString(), 
 					"Minecarts that pass over this will be boosted to 8x their current speed");
