@@ -3,9 +3,9 @@ package com.afforess.bukkit.minecartmaniacore;
 import java.util.HashMap;
 
 import org.bukkit.Material;
-import org.bukkit.Minecart;
-import org.bukkit.Player;
-import org.bukkit.Vector;
+import org.bukkit.entity.Minecart;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 public class MinecartManiaMinecart {
 	public final Minecart minecart;

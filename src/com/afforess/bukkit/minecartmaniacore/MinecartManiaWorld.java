@@ -2,9 +2,9 @@ package com.afforess.bukkit.minecartmaniacore;
 
 import java.util.HashMap;
 
-import org.bukkit.Block;
-import org.bukkit.Minecart;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Minecart;
 
 public class MinecartManiaWorld {
 	private static HashMap<Integer,MinecartManiaMinecart> minecarts = new HashMap<Integer,MinecartManiaMinecart>();

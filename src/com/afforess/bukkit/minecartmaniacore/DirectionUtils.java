@@ -2,7 +2,7 @@ package com.afforess.bukkit.minecartmaniacore;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.bukkit.Block;
+import org.bukkit.block.Block;
 
 public abstract class DirectionUtils {
 	 public enum CompassDirection {
