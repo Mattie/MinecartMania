@@ -15,10 +15,10 @@ public class MinecartManiaWorld {
 	 ** @param the minecart to wrap
 	 **/
 	 public static MinecartManiaMinecart getMinecartManiaMinecart(Minecart minecart) {
-        MinecartManiaMinecart testMinecart = minecarts.get(new Integer(minecart.getEntityID()));
+        MinecartManiaMinecart testMinecart = minecarts.get(new Integer(minecart.getEntityId()));
         if (testMinecart == null) {
         	MinecartManiaMinecart newCart = new MinecartManiaMinecart(minecart);
-        	minecarts.put(new Integer(minecart.getEntityID()), newCart);
+        	minecarts.put(new Integer(minecart.getEntityId()), newCart);
         	return newCart;
         } else {
            return testMinecart;

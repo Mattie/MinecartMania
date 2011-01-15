@@ -89,19 +89,19 @@ public class Configuration {
 	{
 		try {
 			MinecartManiaWorld.setConfigurationValue("high speed booster block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Booster Block", Material.GOLD_BLOCK.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Booster Block", Material.GOLD_BLOCK.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("low speed booster block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Booster Block", Material.GOLD_ORE.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Booster Block", Material.GOLD_ORE.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("high speed brake block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Brake Block", Material.SOUL_SAND.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Brake Block", Material.SOUL_SAND.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("low speed brake block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Brake Block", Material.GRAVEL.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Low Speed Brake Block", Material.GRAVEL.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("reverse block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Reverse Block", Material.WOOL.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Reverse Block", Material.WOOL.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("catcher block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Catcher Block", Material.OBSIDIAN.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Catcher Block", Material.OBSIDIAN.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("ejector block", new Integer(
-					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Ejector Block", Material.IRON_BLOCK.toString())).getID()));
+					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "Ejector Block", Material.IRON_BLOCK.toString())).getId()));
 
 		}
 		catch (Exception exception)

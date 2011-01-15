@@ -136,7 +136,7 @@ public class MinecartManiaMinecart {
 	 }
 	
 	public int getBlockIdBeneath() {
-		return MinecartManiaWorld.getBlockAt(getX(), getY()-1, getZ()).getTypeID();
+		return MinecartManiaWorld.getBlockAt(getX(), getY()-1, getZ()).getTypeId();
 	}
 	
 	public boolean isPoweredBeneath() {
@@ -244,7 +244,7 @@ public class MinecartManiaMinecart {
 	}
 	
 	public boolean isOnRails() {
-		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeID() == Material.RAILS.getID();
+		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeId() == Material.RAILS.getId();
 	}
 	
 	public boolean isAtIntersection() {
