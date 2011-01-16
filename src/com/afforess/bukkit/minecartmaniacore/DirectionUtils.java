@@ -149,23 +149,68 @@ public abstract class DirectionUtils {
 		return CompassDirection.fromId(val);
 	}
 	
-	public static CompassDirection getDirectionFromRotation(double degrees) {
+	private static boolean isFacingNorth(double degrees, double leeway) {
+		return 0 <= degrees && degrees < 45+leeway || 315-leeway <= degrees && degrees <= 360;
+	}
+	private static boolean isFacingEast(double degrees, double leeway) {
+		return 45-leeway <= degrees && degrees < 135+leeway;
+	}
+	private static boolean isFacingSouth(double degrees, double leeway) {
+		return 135-leeway <= degrees && degrees < 225+leeway;
+	}
+	private static boolean isFacingWest(double degrees, double leeway) {
+		return 225-leeway <= degrees && degrees < 315+leeway;
+	}
+	
+	public static CompassDirection getDirectionFromMinecartRotation(double degrees) {
+		
 		while (degrees < 0D) {
 			degrees += 360D;
 		}
 		while (degrees > 360D) {
 			degrees -= 360D;
 		}
-		if (0 <= degrees && degrees < 45) {
+		
+		CompassDirection direction = getDirectionFromRotation(degrees);
+		
+		double leeway = 15;
+		if (direction.equals(CompassDirection.NORTH) || direction.equals(CompassDirection.SOUTH)) {
+			if (isFacingEast(degrees, leeway)) {
+	            return CompassDirection.EAST;
+	        }
+			if (isFacingWest(degrees, leeway)) {
+	        	return CompassDirection.WEST;
+	        }
+		}
+		else if (direction.equals(CompassDirection.EAST) || direction.equals(CompassDirection.WEST)) {
+			if (isFacingNorth(degrees, leeway)) {
+	            return CompassDirection.NORTH;
+	        }
+			if (isFacingSouth(degrees, leeway)) {
+	            return CompassDirection.SOUTH;
+	        }
+		}
+		
+		return direction;
+	}
+	
+	public static CompassDirection getDirectionFromRotation(double degrees) {
+	
+		while (degrees < 0D) {
+			degrees += 360D;
+		}
+		while (degrees > 360D) {
+			degrees -= 360D;
+		}
+		
+		if (isFacingNorth(degrees, 0)) {
             return CompassDirection.NORTH;
-        } else if (45 <= degrees && degrees < 135) {
+        } else if (isFacingEast(degrees, 0)) {
             return CompassDirection.EAST;
-        } else if (135 <= degrees && degrees < 225) {
+        } else if (isFacingSouth(degrees, 0)) {
             return CompassDirection.SOUTH;
-        } else if (225 <= degrees && degrees < 315) {
+        } else if (isFacingWest(degrees, 0)) {
         	return CompassDirection.WEST;
-        } else if (315 <= degrees && degrees <= 360.0) {
-        	return CompassDirection.NORTH;
         }
 		
 		return CompassDirection.NO_DIRECTION;
