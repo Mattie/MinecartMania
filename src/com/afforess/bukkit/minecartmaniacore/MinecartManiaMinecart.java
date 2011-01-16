@@ -7,6 +7,7 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+
 public class MinecartManiaMinecart {
 	public final Minecart minecart;
 	private static final double maxMomentum = 1E308;
@@ -194,8 +195,8 @@ public class MinecartManiaMinecart {
 	}
 
 	public boolean doCatcherBlock() {
-		if (getBlockIdBeneath() == MinecartManiaWorld.getCatcherBlockId() && !isPoweredBeneath())
-		{
+		if (getBlockIdBeneath() == MinecartManiaWorld.getCatcherBlockId())
+ 		{
 			stopCart();
 			return true;
 		}
@@ -247,22 +248,108 @@ public class MinecartManiaMinecart {
 		return MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()).getTypeId() == Material.RAILS.getId();
 	}
 	
+	/**
+	 ** Determines whether or not the track the minecart is currently on is the center piece of a large track intersection. Returns true if it is an intersection.
+	 **/
 	public boolean isAtIntersection() {
 		
 		if (this.isOnRails()) {
 			int paths = 0;
-			if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
-				paths++;
+
+			int data = MinecartManiaWorld.getBlockData(getX(), getY(), getZ());
+			
+			if (data == 0 || data == 1) {
+				if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX(), getY(), getZ()-1) == 0) {
+						paths++;
+					}
+				}
+				if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX(), getY(), getZ()+1) == 0) {
+						paths++;
+					}
+				}
+				if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX()-1, getY(), getZ()) == 1) {
+						paths++;
+					}
+				}
+				if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX()+1, getY(), getZ()+1) == 1) {
+						paths++;
+					}
+				}
 			}
-			if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
-				paths++;
+			
+			else if (data == 6) {
+				if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS) && MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX()+1, getY(), getZ()) == 1 && MinecartManiaWorld.getBlockData(getX(), getY(), getZ()+1) == 0) {
+						paths = 2;
+						if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX()-1, getY(), getZ()) == 1) {
+								paths++; 
+							}
+						}
+						if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX(), getY(), getZ()-1) == 0) {
+								paths++;
+							}
+						}
+					}
+				}
 			}
-			if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS)) {
-				paths++;
+			else if (data == 7) {
+				if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS) && MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX()-1, getY(), getZ()) == 1 && MinecartManiaWorld.getBlockData(getX(), getY(), getZ()+1) == 0) {
+						paths = 2;
+						if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX()+1, getY(), getZ()) == 1) {
+								paths++;
+							}
+						}
+						if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX(), getY(), getZ()-1) == 0) {
+								paths++;
+							}
+						}
+					}
+				}
 			}
-			if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS)) {
-				paths++;
+			else if (data == 8) {
+				if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS) && MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX()-1, getY(), getZ()) == 1 && MinecartManiaWorld.getBlockData(getX(), getY(), getZ()-1) == 0) {
+						paths = 2;
+						if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX()+1, getY(), getZ()) == 1) {
+								paths++;
+							}
+						}
+						if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX(), getY(), getZ()+1) == 0) {
+								paths++;
+							}
+						}
+					}
+				}
 			}
+			else if (data == 9) {
+				if (MinecartManiaWorld.getBlockAt(getX()+1, getY(), getZ()).getType().equals(Material.RAILS) && MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()-1).getType().equals(Material.RAILS)) {
+					if (MinecartManiaWorld.getBlockData(getX()+1, getY(), getZ()) == 1 && MinecartManiaWorld.getBlockData(getX(), getY(), getZ()-1) == 0) {
+						paths = 2;
+						if (MinecartManiaWorld.getBlockAt(getX()-1, getY(), getZ()).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX()-1, getY(), getZ()) == 1) {
+								paths++;
+							}
+						}
+						if (MinecartManiaWorld.getBlockAt(getX(), getY(), getZ()+1).getType().equals(Material.RAILS)) {
+							if (MinecartManiaWorld.getBlockData(getX(), getY(), getZ()+1) == 0) {
+								paths++;
+							}
+						}
+					}
+				}
+			}
+			
 			return paths > 2;
 		}
 		return false;

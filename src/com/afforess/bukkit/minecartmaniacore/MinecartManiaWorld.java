@@ -5,6 +5,8 @@ import java.util.HashMap;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Minecart;
+import org.bukkit.material.MaterialData;
+import org.bukkit.material.Redstone;
 
 public class MinecartManiaWorld {
 	private static HashMap<Integer,MinecartManiaMinecart> minecarts = new HashMap<Integer,MinecartManiaMinecart>();
@@ -99,6 +101,15 @@ public class MinecartManiaWorld {
 		return getIntValue(getConfigurationValue("ejector block"));
 	}
 	
+	public static boolean isMinecartsKillMobs() {
+		Object o = getConfigurationValue("minecarts kill mobs");
+		if (o != null) {
+			Boolean value = (Boolean)o;
+			return value.booleanValue();
+		}
+		return true;
+	}
+	
 	/**
 	 ** Returns the world that server is hosting
 	 **/
@@ -124,7 +135,7 @@ public class MinecartManiaWorld {
 	 ** @param z coordinate
 	 **/
 	public static void setBlockAt(int type, int x, int y, int z) {
-		//TODO implementation...
+		getWorld().getBlockAt(x, y, z).setTypeId(type);
 	}
 	
 	/**
@@ -155,7 +166,20 @@ public class MinecartManiaWorld {
 	 ** @param z coordinate
 	 **/
 	public static boolean isBlockIndirectlyPowered(int x, int y, int z) {
-		//TODO implementation...
-			return false;
+		return isBlockPowered(x+1, y, z) || isBlockPowered(x-1, y, z) || isBlockPowered(x, y, z+1) || isBlockPowered(x, y, z-1);
+	}
+	
+	/**
+	 ** Returns true if the block at the given x, y, z coordinates is directly powered
+	 ** @param x coordinate
+	 ** @param y coordinate
+	 ** @param z coordinate
+	 **/
+	public static boolean isBlockPowered(int x, int y, int z) {
+		MaterialData md = getWorld().getBlockAt(x, y, z).getState().getData();
+		if (md instanceof Redstone) {
+			return ((Redstone) md).isPowered();
 		}
+		return false;
+	}
 }
