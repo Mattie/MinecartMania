@@ -110,6 +110,15 @@ public class MinecartManiaWorld {
 		return true;
 	}
 	
+	public static boolean isPressurePlateRails() {
+		Object o = getConfigurationValue("Pressure Plate Rails");
+		if (o != null) {
+			Boolean value = (Boolean)o;
+			return value.booleanValue();
+		}
+		return true;
+	}
+	
 	/**
 	 ** Returns the world that server is hosting
 	 **/
@@ -166,7 +175,7 @@ public class MinecartManiaWorld {
 	 ** @param z coordinate
 	 **/
 	public static boolean isBlockIndirectlyPowered(int x, int y, int z) {
-		return isBlockPowered(x+1, y, z) || isBlockPowered(x-1, y, z) || isBlockPowered(x, y, z+1) || isBlockPowered(x, y, z-1);
+		return isBlockPowered(x+1, y, z) || isBlockPowered(x-1, y, z) || isBlockPowered(x, y, z+1) || isBlockPowered(x, y, z-1) || isBlockPowered(x, y-1, z);
 	}
 	
 	/**

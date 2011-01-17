@@ -61,6 +61,8 @@ public class Configuration {
 			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecraft Mania Core" + MinecartManiaCore.description.getVersion(), "Minecart Mania Core Config Settings", true);
 			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Minecarts Kill Mobs", "true", 
 			"Minecarts that collide with mobs and animals will kill them and continue uninterrupted.");
+			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "Pressure Plate Rails", "true", 
+			"Pressure Plats will mimic the effect of rails, and minecarts will pass over them inhindered.");
 			MinecartManiaFlatFile.createNewHeader(bufferedwriter, "Minecart Mania Block Settings", "", false);
 			MinecartManiaFlatFile.createNewSetting(bufferedwriter, "High Speed Booster Block", Material.GOLD_BLOCK.toString(), 
 					"Minecarts that pass over this will be boosted to 8x their current speed");
@@ -92,6 +94,8 @@ public class Configuration {
 		try {
 			MinecartManiaWorld.setConfigurationValue("minecarts kill mobs", new Boolean(
 					MinecartManiaFlatFile.getValueFromSetting(file, "Minecarts Kill Mobs", "true")));
+			MinecartManiaWorld.setConfigurationValue("Pressure Plate Rails", new Boolean(
+					MinecartManiaFlatFile.getValueFromSetting(file, "Pressure Plate Rails", "true")));
 			MinecartManiaWorld.setConfigurationValue("high speed booster block", new Integer(
 					Material.valueOf(MinecartManiaFlatFile.getValueFromSetting(file, "High Speed Booster Block", Material.GOLD_BLOCK.toString())).getId()));
 			MinecartManiaWorld.setConfigurationValue("low speed booster block", new Integer(

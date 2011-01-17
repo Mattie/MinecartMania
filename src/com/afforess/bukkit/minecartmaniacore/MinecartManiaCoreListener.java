@@ -24,8 +24,12 @@ public class MinecartManiaCoreListener extends VehicleListener{
 			MinecartManiaMinecart minecart = MinecartManiaWorld.getMinecartManiaMinecart(cart);
 			
 			minecart.doRealisticFriction();
+			minecart.doPressurePlateRails();
 			if (minecart.isMoving()) {
 				minecart.setPreviousFacingDir(minecart.getDirectionOfMotion());
+			}
+			else {
+				minecart.doCatcherBlock();
 			}
 			if (minecart.hasChangedPosition()) {
 				
